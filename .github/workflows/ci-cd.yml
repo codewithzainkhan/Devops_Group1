@@ -122,3 +122,5 @@ jobs:
       run: |
         echo "Docker image pushed successfully to Docker Hub"
         echo "Image: ${{ secrets.DOCKER_USERNAME }}/hospital-management-system:latest"
+
+        
