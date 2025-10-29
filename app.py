@@ -43,8 +43,17 @@ api.add_resource(Procedure, '/procedure/<int:code>')
 api.add_resource(Prescribes, '/prescribes')
 api.add_resource(Undergoess, '/undergoes')
 
-# Routes
+@app.before_first_request
+def initialize_database():
+    """Initialize database before first request"""
+    try:
+        from package.model import init_database
+        init_database()
+        print("✅ Database initialized successfully")
+    except Exception as e:
+        print(f"❌ Database initialization failed: {e}")
 
+# Routes
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
@@ -58,7 +67,8 @@ def index():
 def health_check():
     """Health check endpoint for deployment verification"""
     try:
-        from package.model import conn
+        from package.model import get_db_connection
+        conn = get_db_connection()
         # Test database connection
         conn.execute('SELECT 1')
         return {
@@ -74,7 +84,6 @@ def health_check():
             "error": str(e)
         }, 500
 
-# Add a simple test endpoint
 @app.route('/api/test')
 def test_api():
     return {"message": "API is working", "status": "success"}, 200
