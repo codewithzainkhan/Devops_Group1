@@ -1,6 +1,4 @@
-from flask import Flask,send_from_directory,render_template
-from flask import send_from_directory
-
+from flask import Flask, send_from_directory, render_template
 from flask_restful import Resource, Api
 from package.patient import Patients, Patient
 from package.doctor import Doctors, Doctor
@@ -16,13 +14,15 @@ from package.undergoes import Undergoess, Undergoes
 
 import json
 import os
+from dotenv import load_dotenv
 
-with open('config.json') as data_file:
-    config = json.load(data_file)
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__, static_url_path='')
 api = Api(app)
 
+# Add API resources first
 api.add_resource(Patients, '/patient')
 api.add_resource(Patient, '/patient/<int:id>')
 api.add_resource(Doctors, '/doctor')
@@ -54,6 +54,35 @@ def favicon():
 def index():
     return app.send_static_file('index.html')
 
+@app.route('/health')
+def health_check():
+    """Health check endpoint for deployment verification"""
+    try:
+        from package.model import conn
+        # Test database connection
+        conn.execute('SELECT 1')
+        return {
+            "status": "healthy", 
+            "database": "connected", 
+            "message": "Hospital Management System API is running!",
+            "environment": os.getenv('FLASK_ENV', 'development')
+        }, 200
+    except Exception as e:
+        return {
+            "status": "unhealthy", 
+            "database": "disconnected", 
+            "error": str(e)
+        }, 500
+
+# Add a simple test endpoint
+@app.route('/api/test')
+def test_api():
+    return {"message": "API is working", "status": "success"}, 200
 
 if __name__ == '__main__':
-    app.run(debug=True,host=config['host'],port=config['port'])
+    # Use environment variables with defaults
+    host = os.getenv('APP_HOST', '0.0.0.0')
+    port = int(os.getenv('APP_PORT', 5000))
+    debug = os.getenv('FLASK_DEBUG', 'True').lower() == 'true'
+    
+    app.run(debug=debug, host=host, port=port)
