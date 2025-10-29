@@ -1,37 +1,34 @@
+```markdown
 # Hospital Management System
 
-**Team:**
+A Flask-based hospital management system with RESTful API.
 
-Adarsh Ninganur
+## Features
 
-Aryan Prasad
+- Patient Management
+- Doctor Management
+- Appointment Scheduling
+- Medication Tracking
+- Department Management
 
-**Project Statement:**
+## Tech Stack
 
-Hospital Management System is a tool which can be used to store, retrieve information about the different patients, their procedures, doctors, etc. Not only it stores information but also provides different methods to retrieve information. For e.g., getting the details of a patient(his procedures, address, appointments, phone number, etc.). This makes the retrieval of information quick, which not only saves time but also helps in smooth functioning of the hospital.
+- Flask 2.3.3
+- Flask-RESTful
+- PostgreSQL
+- Docker & Docker Compose
 
-**Introduction:**
+## Quick Start
 
-Hospital Management System handles the basic management of the patient and doctor database, for the smooth functioning of the hospital, helping them to retrieve information easily and adding new information to the database.
+### Using Docker Compose
 
-**FrontEnd:** HTML, CSS, BootStrap
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd Devops_Group1
 
-**BackEnd:** Flask, SQLite(Database), JavaScript, Python
+# Start the application
+docker-compose up --build
 
-**Functional Requirements:**
-
-* Patient's, Doctor's, Nurse’s data can be accessed in their respective tables.
-
-* Appointment id can be used to identify the patient's appointment with the doctor.
-
-* Rooms are displayed with their availability status.
-
-* Medication has the records of medicines available with their brand and description.
-
-* Departments in the hospital can be viewed with their head of department.
-
-* The Prescription that a patient is given can be viewed with medication code which the doctor gave at the time along with their appointment id.
-
-* The procedure which the patient undergoes along with the doctor, patient present at the time in the particular room can be accessed.
-
-* Searches can be made within the department, doctor, nurse, medication, room, etc.
+# Access the application
+open http://localhost:5000
