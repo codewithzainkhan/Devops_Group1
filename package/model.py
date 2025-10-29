@@ -2,6 +2,9 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import json
 import os
+from dotenv import load_dotenv
+load_dotenv()
+ 
 
 config_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'config.json')
 with open(config_path) as data_file:
@@ -16,11 +19,11 @@ class PostgreSQLConnection:
         """Create PostgreSQL connection"""
         try:
             self.conn = psycopg2.connect(
-                host=os.environ.get('DB_HOST', config.get('db_host', 'localhost')),
-                database=os.environ.get('DB_NAME', config.get('db_name', 'hospital_db')),
-                user=os.environ.get('DB_USER', config.get('db_user', 'user')),
-                password=os.environ.get('DB_PASSWORD', config.get('db_password', 'password')),
-                port=os.environ.get('DB_PORT', config.get('db_port', '5432'))
+                host=os.environ.get('DB_HOST'),
+                database=os.environ.get('DB_NAME'),
+                user=os.environ.get('DB_USER'),
+                password=os.environ.get('DB_PASSWORD'),
+                port=os.environ.get('DB_PORT')
             )
             # Set to return dictionaries
             self.conn.cursor_factory = RealDictCursor
