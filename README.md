@@ -1,34 +1,37 @@
-```markdown
-# Hospital Management System
+# 🏥 Hospital Management System
 
-A Flask-based hospital management system with RESTful API.
+A **Flask-based Hospital Management System** providing a RESTful API for managing patients, doctors, appointments, medications, and departments.
 
-## Features
+---
 
-- Patient Management
-- Doctor Management
-- Appointment Scheduling
-- Medication Tracking
-- Department Management
+## 🚀 Features
 
-## Tech Stack
+- 👨‍⚕️ Patient Management  
+- 🧑‍⚕️ Doctor Management  
+- 📅 Appointment Scheduling  
+- 💊 Medication Tracking  
+- 🏢 Department Management  
 
-- Flask 2.3.3
-- Flask-RESTful
-- PostgreSQL
-- Docker & Docker Compose
+---
 
-## Quick Start
+## 🛠️ Tech Stack
 
-### Using Docker Compose
+- **Backend:** Flask 2.3.3, Flask-RESTful  
+- **Database:** PostgreSQL  
+- **Containerization:** Docker & Docker Compose  
+
+---
+
+## ⚡ Quick Start (with Docker Compose)
 
 ```bash
-# Clone the repository
+# 1️⃣ Clone the repository
 git clone <your-repo-url>
-cd Devops_Group1
+cd Hospital_Management_System
 
-# Start the application
+# 2️⃣ Build and start the containers
 docker-compose up --build
 
-# Access the application
-open http://localhost:5000
+# 3️⃣ Access the application
+# Open your browser and go to:
+http://localhost:5000
