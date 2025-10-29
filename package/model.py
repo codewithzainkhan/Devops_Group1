@@ -1,8 +1,10 @@
 import sqlite3
 import json
-with open('config.json') as data_file:
+import os
+config_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'config.json')
+with open(config_path) as data_file:
     config = json.load(data_file)
-
+# PostgreSQL
 conn=sqlite3.connect(config['database'], check_same_thread=False)
 conn.execute('pragma foreign_keys=ON')
 
